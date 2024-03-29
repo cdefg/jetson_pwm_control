@@ -28,8 +28,13 @@ DUTY_CYCLE_TH_VAR_MIN = 10.0
 L = 0.20 # m for axle length
 VR_THRESHOLD = 0.05 # m/s for threshold of linear velocity
 
+
 cmd_twist = None
-odom_twist = None
+odom_twist = Odometry()
+odom_twist.twist = TwistWithCovariance()
+odom_twist.twist.twist.angular.z = 0.
+odom_twist.twist.twist.linear.x = 0.
+
 
 def callback_odom(msg):
     '''
@@ -41,7 +46,6 @@ def callback_odom(msg):
 def callback_cmd_vel(msg):
     '''
     copy the twist from cmd_vel message, called from callback
-    actual ref value in control
     '''
     global cmd_twist
     cmd_twist = msg
