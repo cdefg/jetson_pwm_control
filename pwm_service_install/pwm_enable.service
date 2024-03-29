@@ -1,0 +1,13 @@
+[Unit]  
+Description=Enabling Pin 32 and 33 as PWM output pin for Jetson Nano at startup
+After=network.target  
+  
+[Service]  
+ExecStart=/usr/local/bin/pwm_enable.sh  
+Type=simple  
+Restart=on-failure  
+User=root
+Group=root
+  
+[Install]  
+WantedBy=multi-user.target
